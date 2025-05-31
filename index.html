@@ -1,188 +1,319 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>👨‍💻[ELITE-PRO MENU]</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>ELITEPRO MENU</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-     
-    
+        :root {
+            --primary: #4a6bff;
+            --secondary: #6a4dff;
+            --dark: #0f0f1a;
+            --light: #e0e0ff;
+            --card-bg: #1a1a2e;
+            --text: #e0e0ff;
+            --bg: #0f0f1a;
+        }
+
+        [data-theme="light"] {
+            --primary: #4a6bff;
+            --secondary: #6a4dff;
+            --card-bg: #f0f0ff;
+            --text: #1a1a2e;
+            --bg: #ffffff;
+            --light: #3a3a4e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+        
+        body {
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            padding: 2rem;
+            margin: 0 auto;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            background: var(--card-bg);
+            border: 1px solid var(--primary);
+            color: var(--text);
+            border-radius: 50px;
+            padding: 8px 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .theme-toggle i {
+            font-size: 1rem;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            width: 100%;
+        }
+        
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            border: 1px solid rgba(74, 107, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(74, 107, 255, 0.1);
+            border-color: var(--primary);
+        }
+        
+        .project-logo {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        .project-name {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+        
+        .project-description {
+            color: var(--light);
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+        
+        .visit-btn {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 0.7rem 1.2rem;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: 100%;
+            text-align: center;
+            display: block;
+            text-decoration: none;
+        }
+        
+        .visit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 107, 255, 0.3);
+        }
+
+        footer {
+            margin-top: 4rem;
+            text-align: center;
+            padding: 2rem 0;
+            border-top: 1px solid rgba(74, 107, 255, 0.2);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links a {
+            color: var(--light);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            color: var(--light);
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .theme-toggle {
+                top: auto;
+                bottom: 20px;
+                right: 20px;
+                transform: none;
+            }
+
+            .social-links {
+                gap: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
-
-<!-- Video Background -->
-<video autoplay muted loop id="background-video">
-    <source src="bk.mp4" type="video/mp4"> <!-- Replace with your video file -->
-    Your browser does not support the video tag.
-</video>
-
-<!-- Loading Screen Animation -->
-<div id="loading-screen">
-    <h1>WELCOME TO ELITE-PRO MENU</h1>
-    <div id="loading-bar"></div>
-</div>
-
-<!-- Password Screen -->
-<div id="password-screen">
-    <h2>REGISTER OR ENTER YOUR PASSWORD</h2>
-    <input type="password" id="password-input" placeholder="Enter password">
-    <button onclick="checkPassword()">Submit</button>
-    <button onclick="resetPassword()">Forgot Password?</button>
-</div>
-
-<!-- Main Content -->
-<div id="main-content" style="display: none;">
-    <!-- Three-dot menu icon -->
-    <div class="three-dot-menu" onclick="openWhatsApp()">
-        <span>&#x2022;</span><span>&#x2022;</span><span>&#x2022;</span>
+    <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+        <span>Dark Mode</span>
     </div>
 
-    <header>
-        <div class="header-container">
-            <div class="profile-picture">
-                <img src="elite-pro.jpg" alt="Profile Picture">
+    <div class="container">
+        <header>
+            <h1>My Projects Hub</h1>
+        </header>
+        
+        <div class="projects-grid">
+            <!-- Project 1: Media Downloader -->
+            <div class="project-card">
+                <div class="project-logo">
+                    <i class="fas fa-cloud-download-alt"></i>
+                </div>
+                <h3 class="project-name">Media Downloader</h3>
+                <p class="project-description">Download videos, audio, and images from various platforms with ease.</p>
+                <a href="https://eliteprodownloaders.vercel.app/" class="visit-btn">Visit Project</a>
             </div>
-            <div class="auto-writing">
-                <span id="auto-writing-text">WELCOME TO ELITE-PRO MENU</span>
+            
+            <!-- Project 2: Web Scraper -->
+            <div class="project-card">
+                <div class="project-logo">
+                    <i class="fas fa-spider"></i>
+                </div>
+                <h3 class="project-name">Web Scraper</h3>
+                <p class="project-description">Extract and organize data from websites with our powerful scraping tool.</p>
+                <a href="https://elitepro-web-scraper.vercel.app/" class="visit-btn">Visit Project</a>
+            </div>
+            
+            <!-- Project 3: Bot Repository -->
+            <div class="project-card">
+                <div class="project-logo">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <h3 class="project-name">Bot Repository</h3>
+                <p class="project-description">Collection of ready-to-use bots for automation, moderation, and productivity.</p>
+                <a href="https://elitepro-repo.vercel.app/" class="visit-btn">Explore Bots</a>
+            </div>
+            
+            <!-- Project 4: URL Shortener -->
+            <div class="project-card">
+                <div class="project-logo">
+                    <i class="fas fa-link"></i>
+                </div>
+                <h3 class="project-name">URL Shortener</h3>
+                <p class="project-description">Create clean, memorable short links and track click analytics for your URLs.</p>
+                <a href="https://elitepro-url-clouds.onrender.com/" class="visit-btn">Shorten URLs</a>
+            </div>
+
+            <!-- Project 5: Uptime Monitor for Render -->
+            <div class="project-card">
+                <div class="project-logo">
+                    <i class="fas fa-heart-pulse"></i>
+                </div>
+                <h3 class="project-name">Uptime Monitor</h3>
+                <p class="project-description">Monitor your Render services with real-time uptime tracking and instant outage alerts.</p>
+                <a href="https://elitepro-uptime-monitor.onrender.com" class="visit-btn">Monitor Now</a>
+            </div>
+
+            <!-- Project 6: API -->
+            <div class="project-card">
+                <div class="project-logo">
+                    <i class="fas fa-code-branch"></i>
+                </div>
+                <h3 class="project-name">API Services</h3>
+                <p class="project-description">Powerful RESTful API endpoints for integration with your applications and services.</p>
+                <a href="https://api-eliteproempire.vercel.app/" class="visit-btn">View Documentation</a>
             </div>
         </div>
-    </header>
 
-    <div class="box">
-        <h2>ELITEPRO REPO</h2>
-        <a href="https://elitepro-repo.vercel.app/" target="_blank" class="open-link-btn">𝗢𝗣𝗘𝗡</a>
+        <footer>
+            <div class="social-links">
+                <a href="https://www.facebook.com/people/Elite-Pro/61567898664873/" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="https://whatsapp.com/channel/0029VaXaqHII1rcmdDBBsd3g" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://youtube.com/@eliteprotechs" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="https://t.me/elitepro_md/" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+            </div>
+            <p class="copyright">© 2023 My Projects Hub. All rights reserved.</p>
+        </footer>
     </div>
-
-    <div class="box">
-        <h2>WEB SCRAPER</h2>
-        <a href="https://elitepro-web-scraper.vercel.app/" target="_blank" class="open-link-btn">𝗢𝗣𝗘𝗡</a>
-    </div>
-
-    <div class="box">
-        <h2>ELITEPRO URL</h2>
-        <a href="https://elitepro-url-clouds.onrender.com" target="_blank" class="open-link-btn">𝗢𝗣𝗘𝗡</a>
-    </div>
-
-    <div class="box">
-
-        <h2>CHATGPT</h2>
-
-        <a href="https://elitepro-chatgpt.vercel.app/" target="_blank" class="open-link-btn">𝗢𝗣𝗘𝗡</a>
-
-    </div>
-
-    <div class="box">
-
-        <h2>TIKTOK DOWNLOADER</h2>
-
-        <a href="https://chinedu-bot.github.io/elitepro-tiktok/" target="_blank" class="open-link-btn">𝗢𝗣𝗘𝗡</a>
-
-    </div>
-    
-    <div class="box">
-        <h2>YOUTUBE TUTORIALS</h2>
-        <a href="https://www.youtube.com/@elite-pro-empire" target="_blank" class="open-link-btn">𝗢𝗣𝗘𝗡</a>
-    </div>
-
-    <div class="box">
-        <h2>WHATSAPP CHANNEL</h2>
-        <a href="https://whatsapp.com/channel/0029VaXaqHII1rcmdDBBsd3g" target="_blank" class="open-link-btn">𝗢𝗣𝗘𝗡</a>
-    </div>
-
-    <div class="box">
-        <h2>FACEBOOK PAGE</h2>
-        <a href="https://www.facebook.com/people/Elite-Pro/61567898664873/" target="_blank" class="open-link-btn">𝗢𝗣𝗘𝗡</a>
-    </div>
-
-    <div class="box">
-        <h2>TELEGRAM CHANNEL</h2>
-        <a href="https://t.me/elitepro_md" target="_blank" class="open-link-btn">𝗢𝗣𝗘𝗡</a>
-    </div>
-
-    <div class="box1">
-        <h2>ELITE-PRO</h2>
-    </div>
-    <!-- Music Controls 
-    <div class="audio-controls">
-        <button onclick="playSong()">Play</button>
-        <button onclick="pauseSong()">Pause</button>
-        <button onclick="stopSong()">Stop</button>
-    </div>
-</div> 
-    -->
-
-<!-- Footer -->
-<div class="footer">
-    <p>© 2024 ELITE-PRO | All rights reserved</p>
-</div>
-
-<audio id="background-music" loop>
-    <source src="song1.mp3" type="audio/mpeg"> <!-- Replace with your audio file -->
-    Your browser does not support the audio tag.
-</audio>
 
     <script>
-    // Loading Screen Logic
-    const loadingScreen = document.getElementById('loading-screen');
-    const loadingBar = document.getElementById('loading-bar');
-    const passwordScreen = document.getElementById("password-screen");
-    const mainContent = document.getElementById('main-content');
-
-    let loadingProgress = 0;
-
-    const loadingInterval = setInterval(() => {
-        loadingProgress += 5;
-        loadingBar.style.width = loadingProgress + '%';
-        if (loadingProgress >= 100) {
-            clearInterval(loadingInterval);
-            loadingScreen.style.display = 'none';
-            mainContent.style.display = 'block';
+        const themeToggle = document.getElementById('themeToggle');
+        const icon = themeToggle.querySelector('i');
+        const text = themeToggle.querySelector('span');
+        
+        // Check for saved user preference or use system preference
+        const currentTheme = localStorage.getItem('theme') || 
+                            (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        
+        // Apply the current theme
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        updateButton(currentTheme);
+        
+        themeToggle.addEventListener('click', () => {
+            let newTheme = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateButton(newTheme);
+        });
+        
+        function updateButton(theme) {
+            if (theme === 'light') {
+                icon.className = 'fas fa-moon';
+                text.textContent = 'Dark Mode';
+            } else {
+                icon.className = 'fas fa-sun';
+                text.textContent = 'Light Mode';
+            }
         }
-    }, 100);
-
-    // Password Logic
-    const correctPassword = "your_password"; // Set your password here
-
-    function checkPassword() {
-        const passwordInput = document.getElementById('password-input').value;
-        if (passwordInput === correctPassword) {
-            document.getElementById('password-screen').style.display = 'none';
-            mainContent.style.display = 'block';
-        } else {
-            alert('Incorrect password. Please try again.');
-        }
-    }
-
-    function resetPassword() {
-        alert('Password reset functionality is not implemented yet.');
-    }
-
-    // Music Controls
-    const backgroundMusic = document.getElementById('background-music');
-
-    function playSong() {
-        backgroundMusic.play();
-    }
-
-    function pauseSong() {
-        backgroundMusic.pause();
-    }
-
-    function stopSong() {
-        backgroundMusic.pause();
-        backgroundMusic.currentTime = 0;
-    }
-
-    // Open WhatsApp Function
-    function openWhatsApp() {
-        const phoneNumber = "2347047504860"; // Replace with actual phone number
-        const message = "*Hello Chinwo Chinedu, I need assistance!*";
-        const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-        window.open(url, '_blank');
-    }
-</script>
+    </script>
 </body>
-    </html>
+</html>
